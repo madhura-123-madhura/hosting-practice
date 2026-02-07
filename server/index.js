@@ -18,7 +18,12 @@ const app = express()
 
 // app.use(limiter)
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true })) //middleware
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production'
+        ? 'https://hosting-practice-client.vercel.app'
+        : 'http://localhost:3000',
+    credentials: true
+}));
 app.use(express.json()) // for req.body
 app.use(cookieparser()) //for req.cookie
 
